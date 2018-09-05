@@ -13,6 +13,8 @@ Run this command into your nova project:
 
 ### Add it to your Nova Resource:
 
+Create a new Json field passing an array of Nova Fields as second param
+
 ```php
 use R64\NovaJson\Json;
 
@@ -22,6 +24,19 @@ Json::make('Content', [
               Boolean::make('Active'),
               Textarea::make('Description'),
           ]),
+```
+
+Attribute name can be passed as third param
+
+```php
+use R64\NovaJson\Json;
+
+
+Json::make('Content', [
+              Text::make('Name'),
+              Boolean::make('Active'),
+              Textarea::make('Description'),
+          ], 'content_json'),
 ```
 
 This converts to
