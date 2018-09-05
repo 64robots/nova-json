@@ -10,7 +10,7 @@ export default {
   created() {
     this.fields = this.field.fields.map(field => {
       let value = '';
-      let jsonValue = JSON.parse(this.field.value);
+      let jsonValue = JSON.parse(this.field.value) || {};
       if (field.attribute in jsonValue) {
         value = jsonValue[field.attribute];
       }
