@@ -14,6 +14,13 @@ class Json extends Field
     public $component = 'nova-json';
 
     /**
+     * Indicates if the element should be shown on the index view.
+     *
+     * @var bool
+     */
+    public $showOnIndex = false;
+
+    /**
      * The child fields.
      *
      * @var array
