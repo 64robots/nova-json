@@ -45,4 +45,4 @@ This converts to
 { "name": "Jane", "active": true, "description": "My Description" }
 ```
 
-and is stored in the `content` field.
+and is stored in the `content_json` field.
