@@ -1,6 +1,6 @@
 # JSON Field for Laravel Nova
 
-This field allows to group other Nova Fields and merge their key => value pairs in a unique JSON.
+This field allows you to group together Nova Fields and merge their key => value pairs into unique JSON.
 
 ### Demo
 
@@ -8,7 +8,7 @@ This field allows to group other Nova Fields and merge their key => value pairs 
 
 ### Install
 
-Run this command into your nova project:
+Run this command in your nova project:
 `composer require 64robots/nova-json`
 
 ### Add it to your Nova Resource:
@@ -45,4 +45,4 @@ This converts to
 { "name": "Jane", "active": true, "description": "My Description" }
 ```
 
-and is stored in `content` field.
+and is stored in the `content_json` field.
