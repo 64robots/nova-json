@@ -31,7 +31,7 @@ export default {
           return this.$refs[field.attribute][0].value;
         },
         value => {
-          let currentJson = JSON.parse(this.value) || {};
+          let currentJson = JSON.parse(this.value || '{}');
           if (field.attribute in currentJson) {
             currentJson[field.attribute] = value;
           } else {
