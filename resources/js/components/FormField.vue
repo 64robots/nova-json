@@ -50,7 +50,12 @@ export default {
      * Set the initial, internal value for the field.
      */
     setInitialValue() {
-      this.value = this.field.value || '';
+      this.value = this.field.value || '{}';
+      if(typeof this.value === 'object') {
+          this.value = JSON.stringify(this.value) || '{}';
+          this.value = Object.assign({}, JSON.parse(this.value)) || {};
+          this.value = JSON.stringify(this.value) || '{}';
+      }
     },
 
     /**
