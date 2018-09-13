@@ -55,7 +55,9 @@ class Json extends Field
     {
         $attribute = $attribute ?? $this->attribute;
 
-        $this->value = json_decode($resource->{$attribute});
+        $value = $resource->{$attribute};
+
+        $this->value = is_object($value) ? $value : json_decode($value);
 
         $this->fields->whereInstanceOf(Resolvable::class)->each->resolve($this->value);
 
