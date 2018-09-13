@@ -85,4 +85,24 @@ class Json extends Field
             $field->fillInto($request, $model, $attribute.'->'.$field->attribute, $attribute.'.'.$field->attribute);
         });
     }
+
+    /**
+     * Resolve the field's value for display.
+     *
+     * @param  mixed  $resource
+     * @param  string|null  $attribute
+     * @return void
+     */
+    public function resolveForDisplay($resource, $attribute = null)
+    {
+        $attribute = $attribute ?? $this->attribute;
+
+        $value = $resource->{$attribute};
+
+        $this->value = is_object($value) ? $value : json_decode($value);
+
+        $this->fields->whereInstanceOf(Resolvable::class)->each->resolveForDisplay($this->value);
+
+        parent::resolve($resource, $attribute);
+    }
 }
