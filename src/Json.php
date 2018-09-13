@@ -3,6 +3,8 @@
 namespace R64\NovaJson;
 
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Contracts\Resolvable;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Json extends Field
 {
@@ -39,6 +41,48 @@ class Json extends Field
     {
         parent::__construct($name, $attribute, $resolveCallback);
 
-        $this->withMeta(['fields' => $fields]);
+        $this->fields = collect($fields);
+    }
+
+    /**
+     * Resolve the field's value.
+     *
+     * @param  mixed  $resource
+     * @param  string|null  $attribute
+     * @return void
+     */
+    public function resolve($resource, $attribute = null)
+    {
+        $attribute = $attribute ?? $this->attribute;
+
+        $value = $resource->{$attribute};
+
+        $this->value = is_object($value) ? $value : json_decode($value);
+
+        $this->fields->whereInstanceOf(Resolvable::class)->each->resolve($this->value);
+
+        $this->withMeta(['fields' => $this->fields]);
+
+        parent::resolve($resource, $attribute);
+    }
+
+    /**
+     * Hydrate the given attribute on the model based on the incoming request.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param  string  $requestAttribute
+     * @param  object  $model
+     * @param  string  $attribute
+     * @return void
+     */
+    protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
+    {
+        $request->merge([
+            $requestAttribute => json_decode($request[$requestAttribute], true)
+        ]);
+
+        $this->fields->each(function ($field) use ($request, $model, $attribute) {
+            $field->fillInto($request, $model, $attribute.'->'.$field->attribute, $attribute.'.'.$field->attribute);
+        });
     }
 }
