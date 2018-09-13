@@ -7,6 +7,7 @@
         :ref="field.attribute"
         v-for="(field, index) in fields"
         :is="`form-${field.component}`"
+        :validationErrors="validationErrors"
         :resource-name="resourceName"
         :resource-id="resourceId"
         :field="field"
@@ -52,9 +53,9 @@ export default {
     setInitialValue() {
       this.value = this.field.value || '{}';
       if(typeof this.value === 'object') {
-          this.value = JSON.stringify(this.value) || '{}';
-          this.value = Object.assign({}, JSON.parse(this.value)) || {};
-          this.value = JSON.stringify(this.value) || '{}';
+        this.value = JSON.stringify(this.value) || '{}';
+        this.value = Object.assign({}, JSON.parse(this.value)) || {};
+        this.value = JSON.stringify(this.value) || '{}';
       }
     },
 
@@ -62,7 +63,24 @@ export default {
      * Fill the given FormData object with the field's internal value.
      */
     fill(formData) {
-      formData.append(this.field.attribute, this.value || '');
+      // fake formdata object that we can more easily consume
+      function JsonObject(obj) {
+        this.obj = {};
+      }
+      JsonObject.prototype.append = function (attr, value) {
+        this.obj[attr] = value;
+      }
+      JsonObject.prototype.toJSON = function () {
+        return this.obj;
+      }
+
+      let data = _.tap(new JsonObject(), data => {
+        _(this.fields).each(field => {
+          field.fill(data)
+        })
+      });
+
+      formData.append(this.field.attribute, JSON.stringify(data));
     },
 
     /**
