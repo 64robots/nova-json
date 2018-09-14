@@ -57,7 +57,7 @@ class JSON extends Field
 
         $value = $resource->{$attribute};
 
-        $this->value = is_object($value) ? $value : json_decode($value);
+        $this->value = is_object($value) || is_array($value) ? $value : json_decode($value);
 
         $this->fields->whereInstanceOf(Resolvable::class)->each->resolve($this->value);
 
@@ -99,7 +99,7 @@ class JSON extends Field
 
         $value = $resource->{$attribute};
 
-        $this->value = is_object($value) ? $value : json_decode($value);
+        $this->value = is_object($value) || is_array($value) ? $value : json_decode($value);
 
         $this->fields->whereInstanceOf(Resolvable::class)->each->resolveForDisplay($this->value);
 
