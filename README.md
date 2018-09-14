@@ -16,10 +16,10 @@ Run this command in your nova project:
 Create a new Json field passing an array of Nova Fields as second param
 
 ```php
-use R64\NovaJson\Json;
+use R64\NovaJson\JSON;
 
 
-Json::make('Content', [
+JSON::make('Content', [
               Text::make('Name'),
               Boolean::make('Active'),
               Textarea::make('Description'),
@@ -29,10 +29,10 @@ Json::make('Content', [
 Attribute name can be passed as third param
 
 ```php
-use R64\NovaJson\Json;
+use R64\NovaJson\JSON;
 
 
-Json::make('Content', [
+JSON::make('Content', [
               Text::make('Name'),
               Boolean::make('Active'),
               Textarea::make('Description'),

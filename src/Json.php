@@ -6,7 +6,7 @@ use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Contracts\Resolvable;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Json extends Field
+class JSON extends Field
 {
     /**
      * The field's component.
