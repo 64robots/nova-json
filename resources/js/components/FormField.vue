@@ -1,5 +1,8 @@
 <template>
-  <default-field :field="field">
+  <r64-default-field
+    :field="field"
+    fieldClasses="w-full"
+    :hideLabel="true">
     <template slot="field">
       <component
         :class="{'remove-bottom-border': index == fields.length - 1}"
@@ -13,7 +16,7 @@
         :field="field"
       />
     </template>
-  </default-field>
+  </r64-default-field>
 </template>
 
 <script>
