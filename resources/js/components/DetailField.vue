@@ -13,6 +13,7 @@
         v-for="(field, index) in fields"
         :is="`detail-${field.component}`"
         :field="field"
+        :base-classes="field.baseClasses"
       />
     </div>
   </r64-panel-item>

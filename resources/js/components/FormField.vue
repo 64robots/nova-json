@@ -17,6 +17,7 @@
         :resource-name="resourceName"
         :resource-id="resourceId"
         :field="field"
+        :base-classes="field.baseClasses"
       />
     </template>
   </r64-default-field>
