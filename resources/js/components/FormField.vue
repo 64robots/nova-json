@@ -1,7 +1,7 @@
 <template>
   <r64-default-field
     :field="field"
-    :hide-label="true"
+    :hide-label="field.hideLabelInForms"
     :field-classes="field.fieldClasses"
     :wrapper-classes="field.wrapperClasses"
     :label-classes="field.labelClasses"
