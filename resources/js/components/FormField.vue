@@ -10,14 +10,14 @@
       <component
         :class="{'remove-bottom-border': index == fields.length - 1}"
         :key="index"
-        :ref="field.attribute"
-        v-for="(field, index) in fields"
-        :is="`form-${field.component}`"
+        :ref="f.attribute"
+        v-for="(f, index) in fields"
+        :is="`form-${f.component}`"
         :validationErrors="validationErrors"
         :resource-name="resourceName"
         :resource-id="resourceId"
-        :field="field"
-        :base-classes="field.baseClasses"
+        :field="f"
+        :base-classes="field.childConfig"
       />
     </template>
   </r64-default-field>

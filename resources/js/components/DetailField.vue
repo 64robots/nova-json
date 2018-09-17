@@ -9,11 +9,11 @@
       <component
         :class="{'remove-bottom-border': index == fields.length - 1}"
         :key="index"
-        :ref="field.attribute"
-        v-for="(field, index) in fields"
-        :is="`detail-${field.component}`"
-        :field="field"
-        :base-classes="field.baseClasses"
+        :ref="f.attribute"
+        v-for="(f, index) in fields"
+        :is="`detail-${f.component}`"
+        :field="f"
+        :base-classes="f.childConfig"
       />
     </div>
   </r64-panel-item>
