@@ -3,11 +3,14 @@
 namespace R64\NovaJson;
 
 use Laravel\Nova\Fields\Field;
+use R64\NovaFields\Configurable;
 use Laravel\Nova\Contracts\Resolvable;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class JSON extends Field
 {
+    use Configurable;
+
     /**
      * The field's component.
      *

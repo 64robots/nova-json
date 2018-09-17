@@ -1,8 +1,11 @@
 <template>
   <r64-default-field
     :field="field"
-    fieldClasses="w-full"
-    :hideLabel="true">
+    :hide-label="true"
+    :field-classes="field.fieldClasses"
+    :wrapper-classes="field.wrapperClasses"
+    :label-classes="field.labelClasses"
+  >
     <template slot="field">
       <component
         :class="{'remove-bottom-border': index == fields.length - 1}"
@@ -55,7 +58,7 @@ export default {
      */
     setInitialValue() {
       this.value = this.field.value || '{}';
-      if(typeof this.value === 'object') {
+      if (typeof this.value === 'object') {
         this.value = JSON.stringify(this.value) || '{}';
         this.value = Object.assign({}, JSON.parse(this.value)) || {};
         this.value = JSON.stringify(this.value) || '{}';
@@ -70,17 +73,17 @@ export default {
       function JsonObject(obj) {
         this.obj = {};
       }
-      JsonObject.prototype.append = function (attr, value) {
+      JsonObject.prototype.append = function(attr, value) {
         this.obj[attr] = value;
-      }
-      JsonObject.prototype.toJSON = function () {
+      };
+      JsonObject.prototype.toJSON = function() {
         return this.obj;
-      }
+      };
 
       let data = _.tap(new JsonObject(), data => {
         _(this.fields).each(field => {
-          field.fill(data)
-        })
+          field.fill(data);
+        });
       });
 
       formData.append(this.field.attribute, JSON.stringify(data));
