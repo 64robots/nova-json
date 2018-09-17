@@ -1,5 +1,10 @@
 <template>
-  <panel-item :field="field">
+  <r64-panel-item
+    :field="field"
+    :hide-label="field.hideLabelInDetail"
+    :label-classes="field.panelLabelClasses"
+    :field-classes="field.panelFieldClasses"
+  >
     <div slot="value">
       <component
         :class="{'remove-bottom-border': index == fields.length - 1}"
@@ -10,7 +15,7 @@
         :field="field"
       />
     </div>
-  </panel-item>
+  </r64-panel-item>
 </template>
 
 <script>
