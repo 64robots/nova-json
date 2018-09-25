@@ -1,3 +1,7 @@
+# Important
+
+This field has been merged to [Custom Nova Fields](https://github.com/64robots/nova-fields) package. Keep track of it for updates!
+
 # JSON Field for Laravel Nova
 
 This field allows you to group together Nova Fields and merge their key => value pairs into unique JSON.
@@ -9,14 +13,14 @@ This field allows you to group together Nova Fields and merge their key => value
 ### Install
 
 Run this command in your nova project:
-`composer require 64robots/nova-json`
+`composer require 64robots/nova-fields`
 
 ### Add it to your Nova Resource:
 
 Create a new Json field passing an array of Nova Fields as second param
 
 ```php
-use R64\NovaJson\JSON;
+use R64\NovaFields\JSON;
 
 
 JSON::make('Content', [
@@ -29,7 +33,7 @@ JSON::make('Content', [
 Attribute name can be passed as third param
 
 ```php
-use R64\NovaJson\JSON;
+use R64\NovaFields\JSON;
 
 
 JSON::make('Content', [
